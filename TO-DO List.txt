@@ -1,0 +1,6 @@
+UFRPE 2019.1 Algo-Graphs
+Team: Aldan Andrade, João Uchoa, Lucas Francisco, Givanildo, Elias
+
+
+Convert all files to a single one.
+Fix the headers accordingly.
