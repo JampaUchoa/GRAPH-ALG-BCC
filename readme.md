@@ -1,11 +1,11 @@
-#UFRPE 2019.1 Algo-Graphs
+# UFRPE 2019.1 Algo-Graphs
 
 ```
 Team: Aldan Andrade, João Uchoa, Lucas Francisco, Givanildo, Elias
 Professor: Rodrigo de Souza
 ```
 
-# Build
+## Build
 
 To build in a UNIX command line use 
 ```
