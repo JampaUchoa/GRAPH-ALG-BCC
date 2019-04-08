@@ -1,0 +1,26 @@
+/* V�rtices de grafos s�o representados por objetos do tipo vertex. */
+#define vertex int
+
+/* REPRESENTA��O POR MATRIZ DE ADJAC�NCIAS: A estrutura graph representa um grafo. O campo adj � um ponteiro para a matriz de adjac�ncias do grafo. O campo V cont�m o n�mero de v�rtices e o campo A cont�m o n�mero de arcos do grafo. */
+struct graph {
+   int V;
+   int A;
+   int **adj;
+};
+/* Um Graph � um ponteiro para um graph, ou seja, um Graph cont�m o endere�o de um graph. */
+typedef struct graph *Graph;
+
+
+Graph GRAPHinit( int V);
+static int **MATRIXint( int r, int c, int val);
+void GRAPHinsertArc( Graph G, vertex v, vertex w);
+void GRAPHremoveArc( Graph G, vertex v, vertex w);
+void GRAPHshow( Graph G);
+vertex *GRAPH_isSink(Graph G);
+vertex *GRAPH_isSource(Graph G);
+int GRAPHoutdeg(Graph G, vertex v);
+int GRAPHindeg(Graph G, vertex v);
+Graph GRAPHreverse(Graph G);
+int isTournament(Graph G);
+int GRAPHisadj(Graph G, vertex v, vertex w);
+Graph GRAPHcomplement(Graph G);
