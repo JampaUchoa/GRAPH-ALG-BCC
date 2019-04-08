@@ -36,3 +36,8 @@ int M_isTournament(M_Graph G);
 int M_GRAPHisadj(M_Graph G, vertex v, vertex w);
 
 M_Graph M_GRAPHcomplement(M_Graph G);
+
+// Cria um grafo completo iniciando todos os valores
+// da matriz como 1 exceto os da diagonal principal
+// Complexidade O(n^2)
+M_Graph M_GRAPHbuildComplete(int V);

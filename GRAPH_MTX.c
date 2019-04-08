@@ -188,3 +188,23 @@ M_Graph M_GRAPHcomplement(M_Graph G) {
     return H;
 
 }
+
+// Cria um grafo completo iniciando todos os valores
+// da matriz como 1 exceto os da diagonal principal
+// Complexidade O(n^2)
+M_Graph M_GRAPHbuildComplete(int V) {
+
+    int **m = malloc(V * sizeof(int *));
+    for (vertex i = 0; i < V; ++i)
+        m[i] = malloc(V * sizeof(int));
+    for (vertex i = 0; i < V; ++i)
+        for (vertex j = 0; j < V; ++j)
+            if (i != j)
+                m[i][j] = 1;
+
+    M_Graph G = malloc(sizeof *G);
+    G->V = V;
+    G->A = 0;
+    G->adj = m;
+    return G;
+}
