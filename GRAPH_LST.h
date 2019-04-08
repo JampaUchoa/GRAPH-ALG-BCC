@@ -1,16 +1,19 @@
+#ifndef GRAPH_LST_H
+#define GRAPH_LST_H
+
 /* Vértices de grafos são representados por objetos do tipo vertex. */
 #define vertex int
 
 typedef struct node *link;
 
 /* REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A estrutura graph representa um grafo. O campo adj é um ponteiro para o vetor de listas de adjacência, o campo V contém o número de vértices e o campo A contém o número de arcos do grafo. */
-struct graph {
+struct l_graph {
     int V;
     int A;
     link *adj;
 };
 /* Um L_Graph é um ponteiro para um graph. */
-typedef struct graph *L_Graph;
+typedef struct l_graph *L_Graph;
 /* A lista de adjacência de um vértice v é composta por nós do tipo node. Cada nó da lista corresponde a um arco e contém um vizinho w de v e o endereço do nó seguinte da lista. Um link é um ponteiro para um node. */
 
 struct node {
@@ -51,3 +54,5 @@ int L_GRAPHindeg(L_Graph G, vertex v);
 vertex *L_GRAPH_isSource(L_Graph G);
 
 vertex *L_GRAPH_isSource2(L_Graph G);
+
+#endif

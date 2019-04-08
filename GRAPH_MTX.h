@@ -1,3 +1,8 @@
+#include "GRAPH_LST.h"
+
+#ifndef GRAPH_MTX_H
+#define GRAPH_MTX_H
+
 /* V�rtices de grafos s�o representados por objetos do tipo vertex. */
 #define vertex int
 
@@ -41,3 +46,9 @@ M_Graph M_GRAPHcomplement(M_Graph G);
 // da matriz como 1 exceto os da diagonal principal
 // Complexidade O(n^2)
 M_Graph M_GRAPHbuildComplete(int V);
+
+// Converte a representação do grafo de matriz para lista de ajacencias
+// Complexidade: O(n^2)
+L_Graph M_GRAPHconvert(M_Graph G);
+
+#endif

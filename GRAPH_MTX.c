@@ -208,3 +208,17 @@ M_Graph M_GRAPHbuildComplete(int V) {
     G->adj = m;
     return G;
 }
+
+// Converte a representação do grafo de matriz para lista de ajacencias
+// Complexidade: O(n^2)
+L_Graph M_GRAPHconvert(M_Graph G) {
+
+    L_Graph lGraph = L_GRAPHinit(G->V);
+
+    for (int i = 0; i < G->V; i++)
+        for (int j = 0; j < G->V; j++)
+            if (M_GRAPHisadj(G, i, j))
+                L_GRAPHinsertArc(lGraph, i, j);
+    return lGraph;
+}
+

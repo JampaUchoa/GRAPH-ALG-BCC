@@ -23,6 +23,9 @@ int main(void) {
     M_GRAPHshow(g);
     int *v = M_GRAPH_isSource(g);
 
+    //L_Graph g2 = M_GRAPHconvert(g);
+    //L_GRAPHshow(g2);
+
     M_GRAPHremoveArc(g, 3, 5);
     M_GRAPHremoveArc(g, 4, 1);
     //M_GRAPHshow(g);
