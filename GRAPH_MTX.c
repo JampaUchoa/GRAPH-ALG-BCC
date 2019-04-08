@@ -222,3 +222,12 @@ L_Graph M_GRAPHconvert(M_Graph G) {
     return lGraph;
 }
 
+// Recebe um grafo G e acrescenta um arco antiparalelo a cada arco de G.
+// Complexidade: O(n^2)
+void GRAPHtoUndirected(M_Graph G) {
+
+    for (int i = 0; i < G->V; i++)
+        for (int j = 0; j < G->V; j++)
+            if (M_GRAPHisadj(G, i, j))
+                M_GRAPHinsertArc(G, j, i);
+}

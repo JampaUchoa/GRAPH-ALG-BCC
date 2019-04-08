@@ -19,7 +19,7 @@ int main(void) {
     M_GRAPHinsertArc(g, 5, 6);
     M_GRAPHinsertArc(g, 3, 1);
 
-
+    //GRAPHtoUndirected(g);
     M_GRAPHshow(g);
     int *v = M_GRAPH_isSource(g);
 

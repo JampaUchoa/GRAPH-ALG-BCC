@@ -51,4 +51,8 @@ M_Graph M_GRAPHbuildComplete(int V);
 // Complexidade: O(n^2)
 L_Graph M_GRAPHconvert(M_Graph G);
 
+// Recebe um grafo G e acrescenta um arco antiparalelo a cada arco de G.
+// Complexidade: O(n^2)
+void GRAPHtoUndirected(M_Graph G);
+
 #endif
