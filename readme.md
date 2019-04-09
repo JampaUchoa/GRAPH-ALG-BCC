@@ -1,7 +1,7 @@
 # UFRPE 2019.1 Algo-Graphs
 
 ```
-Team: Aldan Andrade, João Uchoa, Lucas Francisco, Givanildo, Elias
+Team: Aldan Andrade, João Uchoa, Lucas Francisco, Givanildo Júnior, Elias
 Professor: Rodrigo de Souza
 ```
 
