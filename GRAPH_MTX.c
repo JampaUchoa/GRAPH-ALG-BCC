@@ -3,7 +3,7 @@
 #include "GRAPH_MTX.h"
 
 /* REPRESENTA��O POR MATRIZ DE ADJAC�NCIAS: A fun��o M_GRAPHinit() constr�i um grafo com v�rtices 0 1 .. V-1 e nenhum arco. */
-<<<<<<< HEAD
+
 M_Graph M_GRAPHinit( int V, bool complete) {
    M_Graph G = malloc( sizeof *G);
    G->V = V;
@@ -15,15 +15,7 @@ M_Graph M_GRAPHinit( int V, bool complete) {
 	   G->adj = MATRIXint(V, V, 0);
    }
    return G;
-=======
-M_Graph M_GRAPHinit(int V) {
-    M_Graph G = malloc(sizeof *G);
-    G->V = V;
-    G->A = 0;
-    G->adj = MATRIXint(V, V, 0);
-    return G;
->>>>>>> dc173891c56029fb256fb4f460c42e4d7ebbe799
-}
+
 
 /* REPRESENTA��O POR MATRIZ DE ADJAC�NCIAS: A fun��o MATRIXint() aloca uma matriz com linhas 0..r-1 e colunas 0..c-1. Cada elemento da matriz recebe valor val. */
 static int **MATRIXint(int r, int c, int val) {
@@ -198,14 +190,13 @@ int M_GRAPHisadj(M_Graph G, vertex v, vertex w) {
 // Complexidade: O(n^2)
 M_Graph M_GRAPHcomplement(M_Graph G) {
 
-<<<<<<< HEAD
+
   M_Graph H = M_GRAPHinit(G->V,false);
   for(int i = 0; i < G->V; i++)
     for(int j = 0; j < G->V; j++)
       if((i != j) && !M_GRAPHisadj(G, i, j))
         M_GRAPHinsertArc(H, i, j);
-=======
-    M_Graph H = M_GRAPHinit(G->V);
+    M_Graph H = M_GRAPHinit(G->V,false);
     for (int i = 0; i < G->V; i++)
         for (int j = 0; j < G->V; j++)
             if ((i != j) && !M_GRAPHisadj(G, i, j))
@@ -234,7 +225,7 @@ M_Graph M_GRAPHbuildComplete(int V) {
     G->adj = m;
     return G;
 }
->>>>>>> dc173891c56029fb256fb4f460c42e4d7ebbe799
+
 
 // Converte a representação do grafo de matriz para lista de ajacencias
 // Complexidade: O(n^2)
@@ -253,7 +244,7 @@ L_Graph M_GRAPHconvert(M_Graph G) {
 // Complexidade: O(n^2)
 void GRAPHtoUndirected(M_Graph G) {
 
-<<<<<<< HEAD
+
 }
 
 //Grafo completo.  Escreva uma versão mais eficiente da função GRAPHbuildComplete().

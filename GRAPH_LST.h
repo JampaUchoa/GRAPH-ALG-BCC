@@ -60,3 +60,4 @@ L_Graph L_GraphBuildComplete(int v);
 
 M_Graph L_ConvertListToMatrix(L_Graph G);
 
+L_Graph L_GRAPHtoUndirected(L_Graph G);

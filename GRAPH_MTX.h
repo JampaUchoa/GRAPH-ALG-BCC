@@ -16,14 +16,12 @@ struct m_graph {
 typedef struct m_graph *M_Graph;
 
 
-<<<<<<< HEAD
+
 M_Graph M_GRAPHinit( int V, bool complete);
 static int **MATRIXint( int r, int c, int val);
 void M_GRAPHinsertArc( M_Graph G, vertex v, vertex w);
 void M_GRAPHremoveArc( M_Graph G, vertex v, vertex w);
 void M_GRAPHshow( M_Graph G);
-=======
-M_Graph M_GRAPHinit(int V);
 
 static int **MATRIXint(int r, int c, int val);
 
@@ -68,5 +66,4 @@ L_Graph M_GRAPHconvert(M_Graph G);
 // Complexidade: O(n^2)
 void GRAPHtoUndirected(M_Graph G);
 
-#endif
->>>>>>> dc173891c56029fb256fb4f460c42e4d7ebbe799
+
