@@ -11,7 +11,7 @@ struct m_graph {
 typedef struct m_graph *M_Graph;
 
 
-M_Graph M_GRAPHinit( int V);
+M_Graph M_GRAPHinit( int V, bool complete);
 static int **MATRIXint( int r, int c, int val);
 void M_GRAPHinsertArc( M_Graph G, vertex v, vertex w);
 void M_GRAPHremoveArc( M_Graph G, vertex v, vertex w);
@@ -24,3 +24,7 @@ M_Graph M_GRAPHreverse(M_Graph G);
 int M_isTournament(M_Graph G);
 int M_GRAPHisadj(M_Graph G, vertex v, vertex w);
 M_Graph M_GRAPHcomplement(M_Graph G);
+M_Graph M_GRAPHbuildComplete(int V);
+M_Graph M_UGRAPHbuildPetersen();
+bool M_GraphcheckPath(M_Graph G, list <int> vertices);
+M_Graph ConvertListToMatrix(L_Graph G);

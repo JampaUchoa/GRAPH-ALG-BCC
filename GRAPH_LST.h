@@ -50,3 +50,8 @@ int L_GRAPHindeg(L_Graph G, vertex v);
 vertex *L_GRAPH_isSource(L_Graph G);
 
 vertex *L_GRAPH_isSource2(L_Graph G);
+
+L_Graph L_GraphBuildComplete(int v);
+
+
+M_Graph L_ConvertListToMatrix(L_Graph G);
