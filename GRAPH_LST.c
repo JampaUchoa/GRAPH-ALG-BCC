@@ -4,65 +4,65 @@
 #include "GRAPH_MTX.h"
 
 /* REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A função L_GRAPHinit() constrói um grafo com vértices 0 1 .. V-1 e nenhum arco. */
-L_Graph L_GRAPHinit( int V) { 
-   L_Graph G = malloc( sizeof *G);
-   G->V = V; 
-   G->A = 0;
-   G->adj = malloc( V * sizeof (link));
-   for (vertex v = 0; v < V; ++v) 
-      G->adj[v] = NULL;
-   return G;
+L_Graph L_GRAPHinit(int V) {
+    L_Graph G = malloc(sizeof *G);
+    G->V = V;
+    G->A = 0;
+    G->adj = malloc(V * sizeof(link));
+    for (vertex v = 0; v < V; ++v)
+        G->adj[v] = NULL;
+    return G;
 }
 
 /* A função NEWnode() recebe um vértice w e o endereço next de um nó e devolve o endereço a de um novo nó tal que a->w == w e a->next == next. */
-static link NEWnode( vertex w, link next) { 
-   link a = malloc( sizeof (struct node));
-   a->w = w; 
-   a->next = next;     
-   return a;                         
+static link NEWnode(vertex w, link next) {
+    link a = malloc(sizeof(struct node));
+    a->w = w;
+    a->next = next;
+    return a;
 }
 
 
 /* REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A função L_GRAPHinsertArc() insere um arco v-w no grafo G. A função supõe que v e w são distintos, positivos e menores que G->V. Se o grafo já tem um arco v-w, a função não faz nada. */
-void L_GRAPHinsertArc( L_Graph G, vertex v, vertex w) { 
-   for (link a = G->adj[v]; a != NULL; a = a->next) 
-      if (a->w == w) return;
-   G->adj[v] = NEWnode( w, G->adj[v]);
-   G->A++;
+void L_GRAPHinsertArc(L_Graph G, vertex v, vertex w) {
+    for (link a = G->adj[v]; a != NULL; a = a->next)
+        if (a->w == w) return;
+    G->adj[v] = NEWnode(w, G->adj[v]);
+    G->A++;
 }
 
-void L_GRAPHshow( L_Graph G) {
+void L_GRAPHshow(L_Graph G) {
 
-   for(vertex j = 0; j < G->V; j++) {
-      printf("%d ", j);
-      for(link l = G->adj[j]; l != NULL; l = l->next)
-         printf("%d ", l->w);
-      printf("\n");
-   }
+    for (vertex j = 0; j < G->V; j++) {
+        printf("%d ", j);
+        for (link l = G->adj[j]; l != NULL; l = l->next)
+            printf("%d ", l->w);
+        printf("\n");
+    }
 
 }
 
 /* REPRESENTA��O POR LISTAS DE ADJAC�NCIAS: A fun��o L_GRAPHremoveArc() remove do grafo G o arco v-w. A fun��o sup�e que v e w s�o distintos, positivos e menores que G->V. Se n�o existe arco v-w, a fun��o n�o faz nada. */
 // Complexidade: O(s)
-void L_GRAPHremoveArc( L_Graph G, vertex v, vertex w) {
-link anterior = G->adj[v];
-if (G->adj[v]== NULL){
-    return;
-  }else if(G->adj[v]->w == w){
-    G->adj[v] = G->adj[v]->next;
-    free(anterior);
-    G->A-- ;
-  }
-for (link a = anterior->next; a != NULL; a = a->next){
-if (a->w == w){
-  anterior->next = a->next;
-  free(a);
-  G->A--;
-  break;
-}else{
-  anterior = a;
-}
-}
+void L_GRAPHremoveArc(L_Graph G, vertex v, vertex w) {
+    link anterior = G->adj[v];
+    if (G->adj[v] == NULL) {
+        return;
+    } else if (G->adj[v]->w == w) {
+        G->adj[v] = G->adj[v]->next;
+        free(anterior);
+        G->A--;
+    }
+    for (link a = anterior->next; a != NULL; a = a->next) {
+        if (a->w == w) {
+            anterior->next = a->next;
+            free(a);
+            G->A--;
+            break;
+        } else {
+            anterior = a;
+        }
+    }
 }
 
 // Recebe um grafo G.
@@ -73,15 +73,15 @@ if (a->w == w){
 // (Exercício 1.1 de https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
 vertex *L_GRAPH_isSink(L_Graph G) {
 
-   vertex *isSink = malloc(G->V * sizeof (int));
+    vertex *isSink = malloc(G->V * sizeof(int));
 
-   for(vertex x = 0; x < G->V; x++)
-      if (G->adj[x] == NULL)
-         isSink[x] = 1;
-      else
-         isSink[x] = 0;
+    for (vertex x = 0; x < G->V; x++)
+        if (G->adj[x] == NULL)
+            isSink[x] = 1;
+        else
+            isSink[x] = 0;
 
-   return isSink;
+    return isSink;
 
 }
 
@@ -91,13 +91,13 @@ vertex *L_GRAPH_isSink(L_Graph G) {
 // (Exercício 1.2 de https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
 int L_GRAPHoutdeg(L_Graph G, vertex v) {
 
-  vertex j;
-  int d = 0;
-  for (link a = G->adj[v]; a != NULL; a = a->next){
-       d++;
-  }
-   
-  return d;
+    vertex j;
+    int d = 0;
+    for (link a = G->adj[v]; a != NULL; a = a->next) {
+        d++;
+    }
+
+    return d;
 
 }
 
@@ -107,13 +107,13 @@ int L_GRAPHoutdeg(L_Graph G, vertex v) {
 // (Exercício 1.2 de https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
 int L_GRAPHindeg(L_Graph G, vertex v) {
 
-  int d = 0;
-  for(vertex x = 0; x < G->V; x++)
-    for(link l = G->adj[x]; l != NULL; l = l->next)
-       if(l->w == v)
-          d++;
+    int d = 0;
+    for (vertex x = 0; x < G->V; x++)
+        for (link l = G->adj[x]; l != NULL; l = l->next)
+            if (l->w == v)
+                d++;
 
-  return d;
+    return d;
 
 }
 
@@ -125,14 +125,14 @@ int L_GRAPHindeg(L_Graph G, vertex v) {
 // Complexidade: O(n + m)
 int *L_GRAPHindeg_vec(L_Graph G) {
 
-  vertex *indeg_vec = malloc(G->V * sizeof (int));
-  for(vertex x = 0; x > G->V; indeg_vec[x++] = 0);
+    vertex *indeg_vec = malloc(G->V * sizeof(int));
+    for (vertex x = 0; x > G->V; indeg_vec[x++] = 0);
 
-  for(vertex x = 0; x < G->V; x++)
-    for(link l = G->adj[x]; l != NULL; l = l->next)
-       indeg_vec[l->w]++;
+    for (vertex x = 0; x < G->V; x++)
+        for (link l = G->adj[x]; l != NULL; l = l->next)
+            indeg_vec[l->w]++;
 
-  return indeg_vec;
+    return indeg_vec;
 
 }
 
@@ -144,15 +144,15 @@ int *L_GRAPHindeg_vec(L_Graph G) {
 // (Exercício 1.1 de https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
 vertex *L_GRAPH_isSource(L_Graph G) {
 
-   vertex *isSource = malloc(G->V * sizeof (int));
+    vertex *isSource = malloc(G->V * sizeof(int));
 
-   for(vertex x = 0; x < G->V; x++)
-      if(L_GRAPHindeg(G, x) == 0)
-         isSource[x] = 1;
-      else
-         isSource[x] = 0;
+    for (vertex x = 0; x < G->V; x++)
+        if (L_GRAPHindeg(G, x) == 0)
+            isSource[x] = 1;
+        else
+            isSource[x] = 0;
 
-   return isSource;
+    return isSource;
 
 }
 
@@ -165,16 +165,16 @@ vertex *L_GRAPH_isSource(L_Graph G) {
 // (Exercício 1.1 de https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
 vertex *L_GRAPH_isSource2(L_Graph G) {
 
-   vertex *isSource = malloc(G->V * sizeof (int));
+    vertex *isSource = malloc(G->V * sizeof(int));
 
-   vertex *indeg = L_GRAPHindeg_vec(G);
-   for(vertex x = 0; x < G->V; x++)
-      if(indeg[x] == 0)
-         isSource[x] = 1;
-      else
-         isSource[x] = 0;
+    vertex *indeg = L_GRAPHindeg_vec(G);
+    for (vertex x = 0; x < G->V; x++)
+        if (indeg[x] == 0)
+            isSource[x] = 1;
+        else
+            isSource[x] = 0;
 
-   return isSource;
+    return isSource;
 
 }
 
