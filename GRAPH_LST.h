@@ -55,4 +55,10 @@ vertex *L_GRAPH_isSource(L_Graph G);
 
 vertex *L_GRAPH_isSource2(L_Graph G);
 
+// Checa se o vetor dado por seq é um caminho no grafo G
+// Percorrendo a lista a procura o proximo elemento da sequencia do caminho proposto
+// Retorna se ele existe ou nao
+// Complexidade O(k + m)
+int L_GRAPHcheckPath(L_Graph G, int *seq, int k);
+
 #endif

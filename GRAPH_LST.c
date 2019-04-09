@@ -176,3 +176,42 @@ vertex *L_GRAPH_isSource2(L_Graph G) {
     return isSource;
 
 }
+
+// Verifica se o vetor dado por seq é um caminho no grafo G
+// Percorrendo a lista a procura o proximo elemento da sequencia do caminho proposto
+// Retorna se ele existe ou nao
+// Complexidade O(k + m)
+int L_GRAPHcheckPath(L_Graph G, int *seq, int k) {
+
+    // Se nao temos nenhum conjunto
+    if (k < 2) {
+        return 0;
+    }
+
+    vertex src = seq[0];
+    vertex dest;
+    int found;
+
+    for (int i = 1; i < k; i++) {
+        dest = seq[i];
+
+        found = 0;
+        // Temos que procurar na lista ligada pelo vertice next dentro de now
+        for (link l = G->adj[src]; l != NULL; l = l->next) {
+            if (l->w == dest) {
+                found = 1;
+                break;
+            }
+        }
+
+        if (found == 0) {
+            return 0;
+        } else {
+            src = dest;
+        }
+
+    }
+
+    return 1;
+
+}
