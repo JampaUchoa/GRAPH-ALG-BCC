@@ -55,11 +55,8 @@ vertex *L_GRAPH_isSource(L_Graph G);
 
 vertex *L_GRAPH_isSource2(L_Graph G);
 
-<<<<<<< HEAD
 L_Graph L_GraphBuildComplete(int v);
 
 
 M_Graph L_ConvertListToMatrix(L_Graph G);
-=======
-#endif
->>>>>>> dc173891c56029fb256fb4f460c42e4d7ebbe799
+

@@ -266,8 +266,10 @@ Graph M_GRAPHbuildComplete(int V) {
 	return G;
 }
 
-// Verifica passeio.  Escreva uma função booleana GRAPHcheckPath que verifique se uma
-// dada sequência  seq[0..k]  de vértices de um grafo é um passeio. 
+/* Verifica passeio.  Escreva uma função booleana GRAPHcheckPath que verifique se uma
+ dada sequência  seq[0..k]  de vértices de um grafo é um passeio.
+ Complexity O(n)
+*/
 bool M_GraphcheckPath(M_Graph G, list <int> vertices) {
 	int tamanho_passeio = sizeof(vertices) / sizeof(int);
 	vertex primeiro = vertices.pop_front();
@@ -281,7 +283,9 @@ bool M_GraphcheckPath(M_Graph G, list <int> vertices) {
 	}
 	return true;
 }
-//Constrói um grafo de petersen com 10 vértices e 15 arestas
+/*Constrói um grafo de petersen com 10 vértices e 15 arestas
+Complexity O(n^2)
+*/
 M_Graph M_UGRAPHbuildPetersen() {
 	M_Graph Petersen;
 	Petersen = M_GraphInit(10, false);
@@ -302,6 +306,9 @@ M_Graph M_UGRAPHbuildPetersen() {
 
 }
 
+/*
+*/
+
 M_Graph M_GRAPHinputArcs() {
 	M_Graph G;
 	FILE *file;
@@ -319,10 +326,9 @@ M_Graph M_GRAPHinputArcs() {
 		burn2 = getc(file);
 
 	}
-=======
     for (int i = 0; i < G->V; i++)
         for (int j = 0; j < G->V; j++)
             if (M_GRAPHisadj(G, i, j))
                 M_GRAPHinsertArc(G, j, i);
->>>>>>> dc173891c56029fb256fb4f460c42e4d7ebbe799
+	return G;
 }

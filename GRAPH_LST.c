@@ -177,6 +177,8 @@ vertex *L_GRAPH_isSource2(L_Graph G) {
     return isSource;
 
 }
+/*
+*/
 
 L_Graph L_GraphBuildComplete(int v) {
 	L_Graph completo = L_GRAPHinit(v);
@@ -192,8 +194,7 @@ L_Graph L_GraphBuildComplete(int v) {
 
 }
 
-/* Varre toda a matrix passada como parâmetro
-
+/* Varre toda a matrix passada como parâmetro e adiciona os arcos existentes na nova representação
 Complexity O(n^2)
 */
 M_Graph L_ConvertListToMatrix(L_Graph G) {
@@ -204,4 +205,17 @@ M_Graph L_ConvertListToMatrix(L_Graph G) {
 		}
 	}
 	return newMatrix;
+}
+/*Varre o Grafo passado como parâmetro e tenta adicionar um arco tendo o vértice de destino como origem.
+Ex: if [v][w] insert [w][v];
+Complexidade O(n^2)
+*/
+L_Graph GRAPHtoUndirected(L_Graph G) {
+	L_Graph undirectedG = G;
+	for (vertex x = 0; x < G->V; x++) {
+		for (link l = G->adj[x]; l != NULL; l = l->next) {
+			L_GRAPHinsertArc(undirectedG, l->w, x);
+		}
+	}
+	return undirectedG;
 }

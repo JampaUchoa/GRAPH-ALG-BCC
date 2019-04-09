@@ -47,13 +47,11 @@ M_Graph M_GRAPHreverse(M_Graph G);
 int M_isTournament(M_Graph G);
 
 int M_GRAPHisadj(M_Graph G, vertex v, vertex w);
-<<<<<<< HEAD
 M_Graph M_GRAPHcomplement(M_Graph G);
 M_Graph M_GRAPHbuildComplete(int V);
 M_Graph M_UGRAPHbuildPetersen();
 bool M_GraphcheckPath(M_Graph G, list <int> vertices);
-M_Graph ConvertListToMatrix(L_Graph G);
-=======
+M_Graph M_ConvertListToMatrix(L_Graph G);
 
 M_Graph M_GRAPHcomplement(M_Graph G);
 
