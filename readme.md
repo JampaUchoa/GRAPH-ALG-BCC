@@ -5,7 +5,7 @@ Team: Aldan Andrade, João Uchoa, Lucas Francisco, Givanildo Júnior, Elias
 Professor: Rodrigo de Souza
 ```
 
-## Build
+## Build [![Build Status](https://travis-ci.org/JampaUchoa/GRAPH-ALG-BCC.svg?branch=master)](https://travis-ci.org/JampaUchoa/GRAPH-ALG-BCC)
 
 To build in a UNIX command line use 
 ```
