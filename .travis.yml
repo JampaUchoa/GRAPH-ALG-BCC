@@ -1,0 +1,4 @@
+language: c
+script:
+  - gcc main.c GRAPH_LST.c GRAPH_MTX.c -o a.out -std=c99
+  - ./a.out
