@@ -65,4 +65,8 @@ int L_GRAPHcheckPath(L_Graph G, int *seq, int k);
 // Complexidade O(n^2) Devido a inializacao do grafo
 // Sem inicalizar: O(v) aonde v sao vertices
 L_Graph L_UGRAPHbuildPetersen();
+
+// Le um arquivo de arcos e cria um grafo
+// Complexidade O(n^2) Devido a inializacao do grafo
+L_Graph L_GRAPHinputArcs();
 #endif

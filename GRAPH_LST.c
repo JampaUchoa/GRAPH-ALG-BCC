@@ -250,3 +250,29 @@ L_Graph L_UGRAPHbuildPetersen() {
     return pete;
 
 }
+
+// Le um arquivo de arcos e cria um grafo
+// Complexidade O(n^2) Devido a inializacao do grafo
+// Exercicio 3.1 - Joao Uchoa
+L_Graph L_GRAPHinputArcs() {
+
+    FILE *file;
+    file = fopen("arcs.txt", "r");
+
+    int current;
+    int pos = fscanf(file, "%d", &current);
+    
+	L_Graph graph = L_GRAPHinit(current);
+
+    int src, dest;
+
+    pos = fscanf(file, "%d %d", &src, &dest);
+    while (pos != EOF) {
+        L_UGRAPHinsertArc(graph, src, dest);
+        pos = fscanf(file, "%d %d", &src, &dest);
+    };
+
+    fclose(file);
+    return graph;
+
+}
