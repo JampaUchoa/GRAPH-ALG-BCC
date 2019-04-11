@@ -61,4 +61,8 @@ vertex *L_GRAPH_isSource2(L_Graph G);
 // Complexidade O(k + m)
 int L_GRAPHcheckPath(L_Graph G, int *seq, int k);
 
+// Constroi o grafo de Petersen
+// Complexidade O(n^2) Devido a inializacao do grafo
+// Sem inicalizar: O(v) aonde v sao vertices
+L_Graph L_UGRAPHbuildPetersen();
 #endif
