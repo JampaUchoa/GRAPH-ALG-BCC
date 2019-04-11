@@ -57,7 +57,16 @@ vertex *L_GRAPH_isSource2(L_Graph G);
 
 L_Graph L_GraphBuildComplete(int v);
 
-
 M_Graph L_ConvertListToMatrix(L_Graph G);
 
 L_Graph L_GRAPHtoUndirected(L_Graph G);
+
+// Constroi o grafo de Petersen
+// Complexidade O(n^2) Devido a inializacao do grafo
+// Sem inicalizar: O(v) aonde v sao vertices
+L_Graph L_UGRAPHbuildPetersen();
+
+// Le um arquivo de arcos e cria um grafo
+// Complexidade O(n^2) Devido a inializacao do grafo
+L_Graph L_GRAPHinputArcs();
+#endif

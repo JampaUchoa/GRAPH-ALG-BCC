@@ -21,5 +21,5 @@ And to run
 One off command:
 
 ```
-gcc main.c GRAPH_LST.c GRAPH_MTX.c -o a.out && ./a.out && rm ./a.out
+gcc main.c GRAPH_LST.c GRAPH_MTX.c -o a.out && ./a.out; rm ./a.out
 ```

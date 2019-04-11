@@ -31,6 +31,19 @@ void L_GRAPHinsertArc(L_Graph G, vertex v, vertex w) {
     G->A++;
 }
 
+// REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A função L_UGRAPHinsertArc() insere um arco v-w e w-v no grafo G. 
+void L_UGRAPHinsertArc(L_Graph G, vertex v, vertex w) {
+    for (link a = G->adj[v]; a != NULL; a = a->next)
+        if (a->w == w) return;
+    G->adj[v] = NEWnode(w, G->adj[v]);
+    
+    for (link a = G->adj[w]; a != NULL; a = a->next)
+        if (a->w == v) return;
+    G->adj[w] = NEWnode(v, G->adj[w]);
+
+    G->A += 2;
+}
+
 void L_GRAPHshow(L_Graph G) {
 
     for (vertex j = 0; j < G->V; j++) {
@@ -225,20 +238,18 @@ L_Graph L_GRAPHtoUndirected(L_Graph G) {
 // Percorrendo a lista a procura o proximo elemento da sequencia do caminho proposto
 // Retorna se ele existe ou nao
 // Complexidade O(k + m)
+// 1.3 - Joao Uchoa
 int L_GRAPHcheckPath(L_Graph G, int *seq, int k) {
 
     // Se nao temos nenhum conjunto
     if (k < 2) {
         return 0;
     }
-
     vertex src = seq[0];
     vertex dest;
     int found;
-
     for (int i = 1; i < k; i++) {
         dest = seq[i];
-
         found = 0;
         // Temos que procurar na lista ligada pelo vertice next dentro de now
         for (link l = G->adj[src]; l != NULL; l = l->next) {
@@ -247,16 +258,66 @@ int L_GRAPHcheckPath(L_Graph G, int *seq, int k) {
                 break;
             }
         }
-
         if (found == 0) {
             return 0;
         } else {
             src = dest;
         }
-
     }
-
     return 1;
+}
+
+// Constroi o grafo de Petersen
+// Complexidade O(n^2) Devido a inializacao do grafo
+// Sem inicalizar: O(v) aonde v sao vertices
+// Exercicio 2.5 - Joao Uchoa
+L_Graph L_UGRAPHbuildPetersen() {
+	L_Graph pete = L_GRAPHinit(10);
+    for(int i = 0; i < 5; i++) {
+        // Insere arcos inteligados externamente com os internos
+        L_UGRAPHinsertArc(pete, i, i + 5);
+    }
+    // Arestas externas
+    L_UGRAPHinsertArc(pete, 0, 1);
+    L_UGRAPHinsertArc(pete, 1, 2);
+    L_UGRAPHinsertArc(pete, 2, 3);
+    L_UGRAPHinsertArc(pete, 3, 4);
+    L_UGRAPHinsertArc(pete, 4, 0);
+
+    // Arestas internas
+    L_UGRAPHinsertArc(pete, 5, 7);
+    L_UGRAPHinsertArc(pete, 5, 8);
+    L_UGRAPHinsertArc(pete, 6, 8);
+    L_UGRAPHinsertArc(pete, 6, 9);
+    L_UGRAPHinsertArc(pete, 7, 9);   
+
+    return pete;
+
+}
+
+// Le um arquivo de arcos e cria um grafo
+// Complexidade O(n^2) Devido a inializacao do grafo
+// Exercicio 3.1 - Joao Uchoa
+L_Graph L_GRAPHinputArcs() {
+
+    FILE *file;
+    file = fopen("arcs.txt", "r");
+
+    int current;
+    int pos = fscanf(file, "%d", &current);
+    
+	L_Graph graph = L_GRAPHinit(current);
+
+    int src, dest;
+
+    pos = fscanf(file, "%d %d", &src, &dest);
+    while (pos != EOF) {
+        L_UGRAPHinsertArc(graph, src, dest);
+        pos = fscanf(file, "%d %d", &src, &dest);
+    };
+
+    fclose(file);
+    return graph;
 
 
 }
