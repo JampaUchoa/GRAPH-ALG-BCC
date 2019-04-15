@@ -3,13 +3,19 @@
 #include "GRAPH_MTX.h"
 
 /* REPRESENTA��O POR MATRIZ DE ADJAC�NCIAS: A fun��o M_GRAPHinit() constr�i um grafo com v�rtices 0 1 .. V-1 e nenhum arco. */
-M_Graph M_GRAPHinit(int V) {
-    M_Graph G = malloc(sizeof *G);
-    G->V = V;
-    G->A = 0;
-    G->adj = MATRIXint(V, V, 0);
-    return G;
-}
+
+M_Graph M_GRAPHinit( int V, bool complete) {
+   M_Graph G = malloc( sizeof *G);
+   G->V = V;
+   G->A = 0;
+   if (complete) {
+	   G->adj = MATRIXint(V, V, 1);
+   }
+   else {
+	   G->adj = MATRIXint(V, V, 0);
+   }
+   return G;
+
 
 /* REPRESENTA��O POR MATRIZ DE ADJAC�NCIAS: A fun��o MATRIXint() aloca uma matriz com linhas 0..r-1 e colunas 0..c-1. Cada elemento da matriz recebe valor val. */
 static int **MATRIXint(int r, int c, int val) {
@@ -137,8 +143,13 @@ int M_GRAPHisolated(M_Graph G, vertex v) {
 // Complexidade: O(n^2)
 M_Graph M_GRAPHreverse(M_Graph G) {
 
+<<<<<<< HEAD
+  M_Graph H = M_GRAPHinit(G->V,false);
+  H->A = G->A;
+=======
     M_Graph H = M_GRAPHinit(G->V);
     H->A = G->A;
+>>>>>>> dc173891c56029fb256fb4f460c42e4d7ebbe799
 
     for (int j = 0; j < G->V; j++)
         for (int k = 0; k < G->V; k++)
@@ -179,7 +190,13 @@ int M_GRAPHisadj(M_Graph G, vertex v, vertex w) {
 // Complexidade: O(n^2)
 M_Graph M_GRAPHcomplement(M_Graph G) {
 
-    M_Graph H = M_GRAPHinit(G->V);
+
+  M_Graph H = M_GRAPHinit(G->V,false);
+  for(int i = 0; i < G->V; i++)
+    for(int j = 0; j < G->V; j++)
+      if((i != j) && !M_GRAPHisadj(G, i, j))
+        M_GRAPHinsertArc(H, i, j);
+    M_Graph H = M_GRAPHinit(G->V,false);
     for (int i = 0; i < G->V; i++)
         for (int j = 0; j < G->V; j++)
             if ((i != j) && !M_GRAPHisadj(G, i, j))
@@ -209,6 +226,7 @@ M_Graph M_GRAPHbuildComplete(int V) {
     return G;
 }
 
+
 // Converte a representação do grafo de matriz para lista de ajacencias
 // Complexidade: O(n^2)
 L_Graph M_GRAPHconvert(M_Graph G) {
@@ -226,8 +244,82 @@ L_Graph M_GRAPHconvert(M_Graph G) {
 // Complexidade: O(n^2)
 void GRAPHtoUndirected(M_Graph G) {
 
+
+}
+
+//Grafo completo.  Escreva uma versão mais eficiente da função GRAPHbuildComplete().
+Graph M_GRAPHbuildComplete(int V) {
+	M_Graph G;
+	G = M_GRAPHInit(V, true);
+	for (vertex v = 0; v < G->V; ++v) {
+		M_GRAPHremoveArc(G, v, v);
+	}
+	return G;
+}
+
+/* Verifica passeio.  Escreva uma função booleana GRAPHcheckPath que verifique se uma
+ dada sequência  seq[0..k]  de vértices de um grafo é um passeio.
+ Complexity O(n)
+*/
+bool M_GraphcheckPath(M_Graph G, list <int> vertices) {
+	int tamanho_passeio = sizeof(vertices) / sizeof(int);
+	vertex primeiro = vertices.pop_front();
+	vertex segundo = vertices.pop_front();
+	for (i = 0; i < tamanho_passeio - 1; ++i) {
+		if (M_GRAPHisadj(G, primeiro, segundo) != 1) {
+			return false;
+		}
+		primeiro = segundo;
+		segundo = vertices.pop_front();
+	}
+	return true;
+}
+/*Constrói um grafo de petersen com 10 vértices e 15 arestas
+Complexity O(n^2)
+*/
+M_Graph M_UGRAPHbuildPetersen() {
+	M_Graph Petersen;
+	Petersen = M_GraphInit(10, false);
+	for (vertex v = 0; v < (Petersen->V) / 2; ++v)
+	{
+		M_GraphInsertArc(Petersen, v, v + 1);
+		M_GraphInsertArc(Petersen, v, v + 5);
+		M_GraphInsertArc(Petersen, v + 1, v);
+		M_GraphInsertArc(Petersen, v + 5, v);
+
+	}
+	for (vertex v = 0; v < 3; ++v) {
+		M_GraphInsertArc(Petersen, v + 5, v + 7);
+		M_GraphInsertArc(Petersen, v + 5, v + 8);
+		M_GraphInsertArc(Petersen, v + 7, v + 5);
+		M_GraphInsertArc(Petersen, v + 8, v + 5);
+	}
+
+}
+
+/*
+*/
+
+M_Graph M_GRAPHinputArcs() {
+	M_Graph G;
+	FILE *file;
+	file = fopen("entrada_matrix.txt", "r");
+	int vertice_amount = getc(file);
+	int burn1 = getc(file);
+	G = M_GRAPHinit(vertice_amount, false);
+	int arcs_amount = getc(file);
+	burn1 = getc(file);
+	for (vertex i = 0; i < arcs_amount; ++i) {
+		int first_vertice = getc(file);
+		burn1 = getc(file);
+		int second_vertice = getc(file);
+		M_GRAPHinsertArc(G, first_vertice, second_vertice);
+		burn2 = getc(file);
+
+	}
     for (int i = 0; i < G->V; i++)
         for (int j = 0; j < G->V; j++)
             if (M_GRAPHisadj(G, i, j))
                 M_GRAPHinsertArc(G, j, i);
+	return G;
 }

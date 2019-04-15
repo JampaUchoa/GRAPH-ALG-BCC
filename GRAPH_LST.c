@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "GRAPH_LST.h"
+#include "GRAPH_MTX.h"
 
 /* REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A função L_GRAPHinit() constrói um grafo com vértices 0 1 .. V-1 e nenhum arco. */
 L_Graph L_GRAPHinit(int V) {
@@ -190,6 +191,49 @@ vertex *L_GRAPH_isSource2(L_Graph G) {
 
 }
 
+/*
+*/
+
+L_Graph L_GraphBuildComplete(int v) {
+	L_Graph completo = L_GRAPHinit(v);
+
+	for (i = 0; i < v; ++i) {
+		for (j = 0; j < v; ++j) {
+			if (i != j) {
+				L_GRAPHinsertArc(completo, i, j);
+			}
+		}
+	}
+	return completo;
+
+}
+
+/* Varre toda a matrix passada como parâmetro e adiciona os arcos existentes na nova representação
+Complexity O(n^2)
+*/
+M_Graph L_ConvertListToMatrix(L_Graph G) {
+	M_Graph newMatrix = M_GRAPHinit(G->V, false);
+	for (vertex i; i < G->V; i++) {
+		for (link node = G->adj[i]; node != NULL; node = node->next) {
+			M_GRAPHinsertArc(newMatrix, i, node->w);
+		}
+	}
+	return newMatrix;
+}
+/*Varre o Grafo passado como parâmetro e tenta adicionar um arco tendo o vértice de destino como origem.
+Ex: if [v][w] insert [w][v];
+Complexidade O(n^2)
+*/
+L_Graph L_GRAPHtoUndirected(L_Graph G) {
+	L_Graph undirectedG = G;
+	for (vertex x = 0; x < G->V; x++) {
+		for (link l = G->adj[x]; l != NULL; l = l->next) {
+			L_GRAPHinsertArc(undirectedG, l->w, x);
+		}
+	}
+	return undirectedG;
+
+
 // Verifica se o vetor dado por seq é um caminho no grafo G
 // Percorrendo a lista a procura o proximo elemento da sequencia do caminho proposto
 // Retorna se ele existe ou nao
@@ -274,5 +318,6 @@ L_Graph L_GRAPHinputArcs() {
 
     fclose(file);
     return graph;
+
 
 }

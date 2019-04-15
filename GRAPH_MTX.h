@@ -16,7 +16,12 @@ struct m_graph {
 typedef struct m_graph *M_Graph;
 
 
-M_Graph M_GRAPHinit(int V);
+
+M_Graph M_GRAPHinit( int V, bool complete);
+static int **MATRIXint( int r, int c, int val);
+void M_GRAPHinsertArc( M_Graph G, vertex v, vertex w);
+void M_GRAPHremoveArc( M_Graph G, vertex v, vertex w);
+void M_GRAPHshow( M_Graph G);
 
 static int **MATRIXint(int r, int c, int val);
 
@@ -26,6 +31,7 @@ void M_GRAPHremoveArc(M_Graph G, vertex v, vertex w);
 
 void M_GRAPHshow(M_Graph G);
 
+>>>>>>> dc173891c56029fb256fb4f460c42e4d7ebbe799
 vertex *M_GRAPH_isSink(M_Graph G);
 
 vertex *M_GRAPH_isSource(M_Graph G);
@@ -39,6 +45,11 @@ M_Graph M_GRAPHreverse(M_Graph G);
 int M_isTournament(M_Graph G);
 
 int M_GRAPHisadj(M_Graph G, vertex v, vertex w);
+M_Graph M_GRAPHcomplement(M_Graph G);
+M_Graph M_GRAPHbuildComplete(int V);
+M_Graph M_UGRAPHbuildPetersen();
+bool M_GraphcheckPath(M_Graph G, list <int> vertices);
+M_Graph M_ConvertListToMatrix(L_Graph G);
 
 M_Graph M_GRAPHcomplement(M_Graph G);
 
@@ -55,4 +66,4 @@ L_Graph M_GRAPHconvert(M_Graph G);
 // Complexidade: O(n^2)
 void GRAPHtoUndirected(M_Graph G);
 
-#endif
+
