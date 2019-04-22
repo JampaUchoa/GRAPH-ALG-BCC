@@ -69,4 +69,15 @@ L_Graph L_UGRAPHbuildPetersen();
 // Le um arquivo de arcos e cria um grafo
 // Complexidade O(n^2) Devido a inializacao do grafo
 L_Graph L_GRAPHinputArcs();
+
+//Verifica se para cada aresta de v-w em G existe uma aresta w-v em G, caso exista então G é não-dirigido
+//Retorna 1 caso G seja não-ditigigo e 0 caso contrario
+//Complexidade O(n^2)
+// Lucas Francisco Barbosa
+int L_GRAPHisUndirected(L_Graph L);
+
+//Remove uma aresta v-w de um Grafo não-dirijido
+//complexidade: O(n^2) *Se verificar que o grafo é não-dirigido
+// Lucas Francisco Barbosa
+void L_UGRAPHremoveEdge(L_Graph L, Vertex v, Vertex w);
 #endif

@@ -231,3 +231,30 @@ void GRAPHtoUndirected(M_Graph G) {
             if (M_GRAPHisadj(G, i, j))
                 M_GRAPHinsertArc(G, j, i);
 }
+
+//Verifica se para cada aresta de v-w em G existe uma aresta w-v em G, caso exista então G é não-dirigido
+//Retorna 1 caso G seja não-ditigigo e 0 caso contrario
+//Complexidade: O(n^2)
+// Erxecicio 3.1 de (https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
+// Lucas Francisco Barbosa
+int M_GRAPHisUndirected(M_Graph G){
+
+    for (int i=0; i<G->V; i++)
+        for(int j=0; j<G->V; j++)
+            if ((G->adj[i][j])!=(G->adj[j][i])) //percorre a matriz observando se ela é simetrica, caso não seja retorna 0
+                return 0;
+
+    return 1; //caso a matriz seja simetrica retorna 1
+}
+
+//Remove uma aresta v-w de um Grafo não-dirijido
+//complexidade: O(n^2) *Se verificar que o grafo é não-dirigido
+//Exercicio 3.3 de (https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
+// Lucas Francisco Barbosa
+void M_UGRAPHremoveEdge(M_Graph G, Vertex v, Vertex w){
+    if(M_GRAPHisUndirected(G)){
+        G->adj[v][w]=0;     //caso seja G um grafo não dirigido retiram-se as arestas v-w e w-v
+        G->adj[w][v]=0;
+    }
+    return;
+}

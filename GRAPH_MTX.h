@@ -55,4 +55,15 @@ L_Graph M_GRAPHconvert(M_Graph G);
 // Complexidade: O(n^2)
 void GRAPHtoUndirected(M_Graph G);
 
+//Verifica se para cada aresta de v-w em G existe uma aresta w-v em G, caso exista então G é não-dirigido
+//Retorna 1 caso G seja não-ditigigo e 0 caso contrario
+//Complexidade O(n^2)
+// Lucas Francisco Barbosa
+int M_GRAPHisUndirected(M_Graph G);
+
+//Remove uma aresta v-w de um Grafo não-dirijido
+//complexidade: O(n^2) *Se verificar que o grafo é não-dirigido
+// Lucas Francisco Barbosa
+void M_UGRAPHremoveEdge(M_Graph G, Vertex v, Vertex w);
+
 #endif

@@ -276,3 +276,31 @@ L_Graph L_GRAPHinputArcs() {
     return graph;
 
 }
+
+//Verifica se para cada aresta de v-w em G existe uma aresta w-v em G, caso exista então G é não-dirigido
+//Retorna 1 caso G seja não-ditigigo e 0 caso contrario
+//Complexidade O(n*m)
+//Exercicio 3.1 de (https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
+// Lucas Francisco Barbosa
+int L_GRAPHisUndirected(L_Graph L){
+    for(vertex i=0; i<L->V; i++)
+        for(link a= L->adj[i]; a->next!=NULL  ; a=a->next){
+            for(link b = L->adj[a->w]; b->next!= NULL ; b=b->next)  //Para cada valor na fila, percorre a lista correspondente
+                if(b->w == i) break;                                //procurando a aresta paralela, caso não encontre retorna 0
+                else if(b->next==NULL) return 0;                    //Caso encontre passa para o proximo nó da fila, ao terminar a fila
+                                                                    //passa para a proxima posição do vetor
+        }
+
+    return 1; //caso todas as arestas possuas arestas paralelas retorna 1
+}
+
+//Remove uma aresta v-w de um Grafo não-dirijido
+//complexidade: O(n*m) *Se verificar que o grafo é não-dirigido
+//Exercicio 3.3 de (https://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/graphdatastructs.html)
+// Lucas Francisco Barbosa
+void L_UGRAPHremoveEdge(L_Graph L, Vertex v, Vertex w){
+    if(L_GRAPHisUndirected(L)){
+        L_GRAPHremoveArc(L,v,w);
+        L_GRAPHremoveArc(L,w,v);
+    }
+}
