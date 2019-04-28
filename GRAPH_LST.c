@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "GRAPH_LST.h"
+#include "GRAPH_MTX.h"
+#include "GRAPH_MTX.c"
+#include "GRAPH_LST.c"
+
 
 /* REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A função L_GRAPHinit() constrói um grafo com vértices 0 1 .. V-1 e nenhum arco. */
 L_Graph L_GRAPHinit(int V) {
@@ -8,7 +12,8 @@ L_Graph L_GRAPHinit(int V) {
     G->V = V;
     G->A = 0;
     G->adj = malloc(V * sizeof(link));
-    for (vertex v = 0; v < V; ++v)
+    vertex v;
+    for ( v = 0; v < V; ++v)
         G->adj[v] = NULL;
     return G;
 }
@@ -24,19 +29,21 @@ static link NEWnode(vertex w, link next) {
 
 /* REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A função L_GRAPHinsertArc() insere um arco v-w no grafo G. A função supõe que v e w são distintos, positivos e menores que G->V. Se o grafo já tem um arco v-w, a função não faz nada. */
 void L_GRAPHinsertArc(L_Graph G, vertex v, vertex w) {
-    for (link a = G->adj[v]; a != NULL; a = a->next)
+    link a;
+    for (a = G->adj[v]; a != NULL; a = a->next)
         if (a->w == w) return;
     G->adj[v] = NEWnode(w, G->adj[v]);
     G->A++;
 }
 
-// REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A função L_UGRAPHinsertArc() insere um arco v-w e w-v no grafo G. 
+// REPRESENTAÇÃO POR LISTAS DE ADJACÊNCIA: A função L_UGRAPHinsertArc() insere um arco v-w e w-v no grafo G.
 void L_UGRAPHinsertArc(L_Graph G, vertex v, vertex w) {
-    for (link a = G->adj[v]; a != NULL; a = a->next)
+    link a;
+    for (a = G->adj[v]; a != NULL; a = a->next)
         if (a->w == w) return;
     G->adj[v] = NEWnode(w, G->adj[v]);
-    
-    for (link a = G->adj[w]; a != NULL; a = a->next)
+
+    for (a = G->adj[w]; a != NULL; a = a->next)
         if (a->w == v) return;
     G->adj[w] = NEWnode(v, G->adj[w]);
 
@@ -44,10 +51,11 @@ void L_UGRAPHinsertArc(L_Graph G, vertex v, vertex w) {
 }
 
 void L_GRAPHshow(L_Graph G) {
-
-    for (vertex j = 0; j < G->V; j++) {
+    vertex j;
+    link l;
+    for ( j = 0; j < G->V; j++) {
         printf("%d ", j);
-        for (link l = G->adj[j]; l != NULL; l = l->next)
+        for (l = G->adj[j]; l != NULL; l = l->next)
             printf("%d ", l->w);
         printf("\n");
     }
@@ -65,7 +73,8 @@ void L_GRAPHremoveArc(L_Graph G, vertex v, vertex w) {
         free(anterior);
         G->A--;
     }
-    for (link a = anterior->next; a != NULL; a = a->next) {
+    link a;
+    for (a = anterior->next; a != NULL; a = a->next) {
         if (a->w == w) {
             anterior->next = a->next;
             free(a);
@@ -86,8 +95,8 @@ void L_GRAPHremoveArc(L_Graph G, vertex v, vertex w) {
 vertex *L_GRAPH_isSink(L_Graph G) {
 
     vertex *isSink = malloc(G->V * sizeof(int));
-
-    for (vertex x = 0; x < G->V; x++)
+    vertex x;
+    for (x = 0; x < G->V; x++)
         if (G->adj[x] == NULL)
             isSink[x] = 1;
         else
@@ -105,7 +114,8 @@ int L_GRAPHoutdeg(L_Graph G, vertex v) {
 
     vertex j;
     int d = 0;
-    for (link a = G->adj[v]; a != NULL; a = a->next) {
+    link a;
+    for (a = G->adj[v]; a != NULL; a = a->next) {
         d++;
     }
 
@@ -120,8 +130,10 @@ int L_GRAPHoutdeg(L_Graph G, vertex v) {
 int L_GRAPHindeg(L_Graph G, vertex v) {
 
     int d = 0;
-    for (vertex x = 0; x < G->V; x++)
-        for (link l = G->adj[x]; l != NULL; l = l->next)
+    vertex x;
+    link l;
+    for (x = 0; x < G->V; x++)
+        for (l = G->adj[x]; l != NULL; l = l->next)
             if (l->w == v)
                 d++;
 
@@ -138,12 +150,14 @@ int L_GRAPHindeg(L_Graph G, vertex v) {
 int *L_GRAPHindeg_vec(L_Graph G) {
 
     vertex *indeg_vec = malloc(G->V * sizeof(int));
-    for (vertex x = 0; x > G->V; indeg_vec[x++] = 0);
+    vertex x;
+    for (x = 0; x > G->V; indeg_vec[x++] = 0);
 
-    for (vertex x = 0; x < G->V; x++)
-        for (link l = G->adj[x]; l != NULL; l = l->next)
+    for ( x = 0; x < G->V; x++){
+        link l;
+        for (l = G->adj[x]; l != NULL; l = l->next)
             indeg_vec[l->w]++;
-
+    }
     return indeg_vec;
 
 }
@@ -157,8 +171,8 @@ int *L_GRAPHindeg_vec(L_Graph G) {
 vertex *L_GRAPH_isSource(L_Graph G) {
 
     vertex *isSource = malloc(G->V * sizeof(int));
-
-    for (vertex x = 0; x < G->V; x++)
+    vertex x;
+    for (x = 0; x < G->V; x++)
         if (L_GRAPHindeg(G, x) == 0)
             isSource[x] = 1;
         else
@@ -180,7 +194,8 @@ vertex *L_GRAPH_isSource2(L_Graph G) {
     vertex *isSource = malloc(G->V * sizeof(int));
 
     vertex *indeg = L_GRAPHindeg_vec(G);
-    for (vertex x = 0; x < G->V; x++)
+    vertex x;
+    for (x = 0; x < G->V; x++)
         if (indeg[x] == 0)
             isSource[x] = 1;
         else
@@ -204,11 +219,13 @@ int L_GRAPHcheckPath(L_Graph G, int *seq, int k) {
     vertex src = seq[0];
     vertex dest;
     int found;
-    for (int i = 1; i < k; i++) {
+    int i;
+    for (i = 1; i < k; i++) {
         dest = seq[i];
         found = 0;
         // Temos que procurar na lista ligada pelo vertice next dentro de now
-        for (link l = G->adj[src]; l != NULL; l = l->next) {
+        link l;
+        for (l = G->adj[src]; l != NULL; l = l->next) {
             if (l->w == dest) {
                 found = 1;
                 break;
@@ -229,7 +246,8 @@ int L_GRAPHcheckPath(L_Graph G, int *seq, int k) {
 // Exercicio 2.5 - Joao Uchoa
 L_Graph L_UGRAPHbuildPetersen() {
 	L_Graph pete = L_GRAPHinit(10);
-    for(int i = 0; i < 5; i++) {
+    int i;
+    for(i = 0; i < 5; i++) {
         // Insere arcos inteligados externamente com os internos
         L_UGRAPHinsertArc(pete, i, i + 5);
     }
@@ -245,7 +263,7 @@ L_Graph L_UGRAPHbuildPetersen() {
     L_UGRAPHinsertArc(pete, 5, 8);
     L_UGRAPHinsertArc(pete, 6, 8);
     L_UGRAPHinsertArc(pete, 6, 9);
-    L_UGRAPHinsertArc(pete, 7, 9);   
+    L_UGRAPHinsertArc(pete, 7, 9);
 
     return pete;
 
@@ -261,7 +279,7 @@ L_Graph L_GRAPHinputArcs() {
 
     int current;
     int pos = fscanf(file, "%d", &current);
-    
+
 	L_Graph graph = L_GRAPHinit(current);
 
     int src, dest;
@@ -276,3 +294,46 @@ L_Graph L_GRAPHinputArcs() {
     return graph;
 
 }
+
+// Le um arquivo de lista de adj e cria um grafo
+// Complexidade O(n^2)
+// Exercicio 3.2 - Givanildo Júnior
+
+
+L_Graph L_GRAPHinputLists(FILE *in) {
+
+    int V, i, v, w, error = 0, insert;
+    char c;
+    Graph G;
+    error |= fscanf (in, " %d", &V);
+    G = GRAPHinit (V);
+    for (i = 0; i < V; ++i) {
+        error |= fscanf (in, " %d", &v);
+        w = c = insert = 0;
+        while (c != '\n') {
+            error |= fscanf (in, "%c", &c);
+            while (isdigit(c)) {
+                insert = 1;
+                w *= 10;
+                w += c - '0';
+                error |= fscanf (in, "%c", &c);
+            }
+            if (insert) GRAPHinsertArc (G, v, w);
+            w = insert = 0;
+        }
+    }
+    return G;
+}
+
+//Escreva uma função UGRAPHbuildCycle() que receba um inteiro V e construa um grafo-circuito (não-dirigido).
+// Complexidade O(1)
+// Exercicio 2.3 - Givanildo Júnior
+
+L_Graph L_UGRAPHbuildCycle(vertex V){
+
+G_Graph x = UGRAPHbuildCycle(V);
+L_Graph y = M_GRAPHconvert(x);
+
+return y;
+}
+

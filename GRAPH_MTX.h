@@ -14,7 +14,7 @@ struct m_graph {
 };
 /* Um Graph � um ponteiro para um graph, ou seja, um Graph cont�m o endere�o de um graph. */
 typedef struct m_graph *M_Graph;
-
+typedef struct l_graph *L_Graph;
 
 M_Graph M_GRAPHinit(int V);
 
@@ -46,7 +46,6 @@ M_Graph M_GRAPHcomplement(M_Graph G);
 // da matriz como 1 exceto os da diagonal principal
 // Complexidade O(n^2)
 M_Graph M_GRAPHbuildComplete(int V);
-
 // Converte a representação do grafo de matriz para lista de ajacencias
 // Complexidade: O(n^2)
 L_Graph M_GRAPHconvert(M_Graph G);
@@ -54,5 +53,10 @@ L_Graph M_GRAPHconvert(M_Graph G);
 // Recebe um grafo G e acrescenta um arco antiparalelo a cada arco de G.
 // Complexidade: O(n^2)
 void GRAPHtoUndirected(M_Graph G);
+
+//Aluno :Givanildo Júnior
+M_Graph UGRAPHbuildCycle(int V);
+int isTournament(M_Graph G);
+M_Graph UGRAPHcomplete(int V);
 
 #endif

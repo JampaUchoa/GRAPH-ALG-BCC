@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include "GRAPH_LST.h"
 #include "GRAPH_MTX.h"
+#include "GRAPH_MTX.c"
+#include "GRAPH_LST.c"
+
 
 int main(void) {
 
-    M_Graph g = M_GRAPHinit(8);
+    /*M_Graph g = M_GRAPHinit(8);
 
     M_GRAPHinsertArc(g, 0, 4);
     M_GRAPHinsertArc(g, 4, 1);
@@ -30,8 +33,8 @@ int main(void) {
     M_GRAPHremoveArc(g, 4, 1);
     //M_GRAPHshow(g);
     //vertex *v = M_GRAPH_isSource(g);
-
-    for (int i = 0; i < g->V; i++)
+    int i;
+    for (i = 0; i < g->V; i++)
         printf("%d ", v[i]);
 
 
@@ -39,7 +42,10 @@ int main(void) {
     // Graph h = M_GRAPHcomplement(g);
 
     // M_GRAPHshow(h);
-
+*/
+    int x = 5;
+    M_Graph giva = UGRAPHbuildCycle(x);
+    M_GRAPHshow(giva);
 
     return 0;
 }

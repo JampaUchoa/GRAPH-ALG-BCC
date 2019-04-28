@@ -1,5 +1,7 @@
 #ifndef GRAPH_LST_H
 #define GRAPH_LST_H
+#include "GRAPH_MTX.c"
+#include "GRAPH_LST.c"
 
 /* Vértices de grafos são representados por objetos do tipo vertex. */
 #define vertex int
@@ -15,6 +17,8 @@ struct l_graph {
 /* Um L_Graph é um ponteiro para um graph. */
 typedef struct l_graph *L_Graph;
 /* A lista de adjacência de um vértice v é composta por nós do tipo node. Cada nó da lista corresponde a um arco e contém um vizinho w de v e o endereço do nó seguinte da lista. Um link é um ponteiro para um node. */
+
+typedef struct m_graph *M_Graph;
 
 struct node {
     vertex w;
@@ -69,4 +73,12 @@ L_Graph L_UGRAPHbuildPetersen();
 // Le um arquivo de arcos e cria um grafo
 // Complexidade O(n^2) Devido a inializacao do grafo
 L_Graph L_GRAPHinputArcs();
+
+
+//Givanildo Júnor
+L_Graph L_GRAPHinputLists(FILE *in);
+
+L_Graph UGRAPHbuildCycle(int V);
+
+
 #endif
